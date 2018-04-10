@@ -9,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -31,8 +32,10 @@ public class Menu extends AppCompatActivity {
 
     ImageView imgPlay, imgShare, imgRateUs, imgTemaDarbuka;
     String appPackageName = BuildConfig.APPLICATION_ID; // getPackageName() from Context or Activity object
-    public static boolean iklanOpen = false;
+    public static boolean iklanOpen = false, isUtama = false;
     AdView mAdView;
+    public static int tema = 1;
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class Menu extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         iklanOpen = false;
+        isUtama = false;
         if (mAdView != null) {
             mAdView.resume();
         }
@@ -70,6 +74,7 @@ public class Menu extends AppCompatActivity {
     }
 
     private void declaration() {
+        mediaPlayer = MediaPlayer.create(Menu.this,R.raw.tok);
         mAdView = findViewById(R.id.adview);
         imgPlay = findViewById(R.id.imgPlay);
         imgTemaDarbuka = findViewById(R.id.imgDarbukaTheme);
@@ -112,6 +117,7 @@ public class Menu extends AppCompatActivity {
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.start();
                 imgPlay.startAnimation(AnimationUtils.loadAnimation(Menu.this, R.anim.zoom_out2));
                 cekKoneksi();
             }
@@ -119,6 +125,7 @@ public class Menu extends AppCompatActivity {
         imgTemaDarbuka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.start();
                 imgTemaDarbuka.startAnimation(AnimationUtils.loadAnimation(Menu.this, R.anim.zoom_out2));
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -131,6 +138,7 @@ public class Menu extends AppCompatActivity {
         imgShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.start();
                 imgShare.startAnimation(AnimationUtils.loadAnimation(Menu.this, R.anim.zoom_out2));
                 final Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -147,6 +155,7 @@ public class Menu extends AppCompatActivity {
         imgRateUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mediaPlayer.start();
                 imgRateUs.startAnimation(AnimationUtils.loadAnimation(Menu.this, R.anim.zoom_out2));
                 try {
                     new Handler().postDelayed(new Runnable() {
@@ -169,6 +178,7 @@ public class Menu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        mediaPlayer.start();
         dialogOut();
     }
 
@@ -246,7 +256,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onAdClosed() {
                 super.onAdClosed();
-                if (!Menu.this.isFinishing()) {
+                if (!isUtama) {
                     theDialog.dismiss();
                     startActivity(new Intent(Menu.this, GameMain.class));
                 }
@@ -271,7 +281,7 @@ public class Menu extends AppCompatActivity {
             public void run() {
                 if (!iklanOpen) {
                     iklanOpen = true;
-                    if (!Menu.this.isFinishing()) {
+                    if (!isUtama) {
                         theDialog.dismiss();
                         startActivity(new Intent(Menu.this,GameMain.class));
                     }

@@ -55,8 +55,6 @@
             android:id="@+id/imgDarbukaTheme"
             android:layout_width="200dp"
             android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
             android:src="@drawable/tema_pony"/>
     </LinearLayout>
     <com.google.android.gms.ads.AdView

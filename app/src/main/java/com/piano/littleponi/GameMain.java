@@ -26,6 +26,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
+import java.util.Calendar;
+
 @SuppressWarnings("deprecation")
 public class GameMain extends AppCompatActivity {
 
@@ -50,10 +52,11 @@ public class GameMain extends AppCompatActivity {
     MediaPlayer mpSound6 = new MediaPlayer();
     MediaPlayer mpSound7 = new MediaPlayer();
     MediaPlayer mpSound8 = new MediaPlayer();
+    MediaPlayer mediaPlayer = new MediaPlayer();
     SoundPool sp;
     int music = 1;
     boolean isFirst1 = false, isFirst2 = false, isFirst3 = false;
-    AdView mAdView;
+    AdView mAdView, mAdViewTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class GameMain extends AppCompatActivity {
         setContentView(R.layout.game_main);
         deklarasi();
         action();
+        tglHariIni();
     }
 
     @Override
@@ -68,6 +72,9 @@ public class GameMain extends AppCompatActivity {
         // This method should be called in the parent Activity's onPause() method.
         if (mAdView != null) {
             mAdView.pause();
+        }
+        if (mAdViewTop != null) {
+            mAdViewTop.pause();
         }
         super.onPause();
     }
@@ -79,7 +86,10 @@ public class GameMain extends AppCompatActivity {
         if (mAdView != null) {
             mAdView.resume();
         }
-
+        if (mAdViewTop != null) {
+            mAdViewTop.resume();
+        }
+        Menu.isUtama = true;
     }
 
     @Override
@@ -87,6 +97,9 @@ public class GameMain extends AppCompatActivity {
         // This method should be called in the parent Activity's onDestroy() method.
         if (mAdView != null) {
             mAdView.destroy();
+        }
+        if (mAdViewTop != null) {
+            mAdViewTop.destroy();
         }
         super.onDestroy();
     }
@@ -97,6 +110,7 @@ public class GameMain extends AppCompatActivity {
     }
 
     private void deklarasi() {
+        mediaPlayer = MediaPlayer.create(GameMain.this, R.raw.tok);
         mpSound1 = MediaPlayer.create(GameMain.this, R.raw.hohner_soprano_melodica_01_c3);
         mpSound2 = MediaPlayer.create(GameMain.this, R.raw.hohner_soprano_melodica_02_d3);
         mpSound3 = MediaPlayer.create(GameMain.this, R.raw.hohner_soprano_melodica_03_e3);
@@ -107,6 +121,7 @@ public class GameMain extends AppCompatActivity {
         mpSound8 = MediaPlayer.create(GameMain.this, R.raw.hohner_soprano_melodica_08_c4);
 
         mAdView = findViewById(R.id.adview);
+        mAdViewTop = findViewById(R.id.adviewTop);
         layNote = findViewById(R.id.linearTeks);
         layNote.setVisibility(View.GONE);
         teksNote = findViewById(R.id.teksNote);
@@ -169,9 +184,38 @@ public class GameMain extends AppCompatActivity {
                 super.onAdLeftApplication();
             }
         });
+        mAdViewTop.loadAd(adRequest);
+        mAdViewTop.setAdListener(new AdListener() {
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+        });
         teksNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 layNote.setVisibility(View.VISIBLE);
                 teksNote.setVisibility(View.GONE);
                 btnClose.setVisibility(View.VISIBLE);
@@ -180,6 +224,7 @@ public class GameMain extends AppCompatActivity {
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 btnClose.setVisibility(View.GONE);
                 layNote.setVisibility(View.GONE);
                 teksNote.setVisibility(View.VISIBLE);
@@ -188,20 +233,21 @@ public class GameMain extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer.start();
                 onBackPressed();
             }
         });
-        if (TemaPony.tema == 1) {
-          layUtama.setBackground(getResources().getDrawable(R.drawable.background1));
-        } else if (TemaPony.tema == 2) {
+        if (Menu.tema == 0) {
+            layUtama.setBackground(getResources().getDrawable(R.drawable.background1));
+        } else if (Menu.tema == 1) {
             layUtama.setBackground(getResources().getDrawable(R.drawable.background2));
-        } else if (TemaPony.tema == 3) {
+        } else if (Menu.tema == 2) {
             layUtama.setBackground(getResources().getDrawable(R.drawable.background3));
-        } else if (TemaPony.tema == 4) {
+        } else if (Menu.tema == 3) {
             layUtama.setBackground(getResources().getDrawable(R.drawable.background4));
-        } else if (TemaPony.tema == 5) {
+        } else if (Menu.tema == 4) {
             layUtama.setBackground(getResources().getDrawable(R.drawable.background5));
-        } else if (TemaPony.tema == 6) {
+        } else if (Menu.tema == 5) {
             layUtama.setBackground(getResources().getDrawable(R.drawable.background6));
         }
         imgPiano.setAlpha(1);
@@ -368,7 +414,8 @@ public class GameMain extends AppCompatActivity {
     private boolean playSound2(int id, MotionEvent motionEvent) {
         Log.d("Motionsss  ", String.valueOf(motionEvent));
         if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgRe.setBackgroundResource(R.drawable.re2);if (music == 0) {
+            imgRe.setBackgroundResource(R.drawable.re2);
+            if (music == 0) {
                 mpSound2.start();
             } else {
                 sp.play(id, 1.0f, 1.0f, 0, 0, 1.0f);
@@ -417,7 +464,8 @@ public class GameMain extends AppCompatActivity {
     private boolean playSound3(int id, MotionEvent motionEvent) {
         Log.d("Motionsss  ", String.valueOf(motionEvent));
         if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgMi.setBackgroundResource(R.drawable.mi2);if (music == 0) {
+            imgMi.setBackgroundResource(R.drawable.mi2);
+            if (music == 0) {
                 mpSound3.start();
             } else {
                 sp.play(id, 1.0f, 1.0f, 0, 0, 1.0f);
@@ -450,7 +498,7 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-            
+
             imgMi.setBackgroundResource(R.drawable.mi1);
         }
         return true;
@@ -493,7 +541,7 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-            
+
             imgFa.setBackgroundResource(R.drawable.fa1);
         }
         return true;
@@ -536,7 +584,7 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-            
+
             imgSol.setBackgroundResource(R.drawable.sol1);
         }
         return true;
@@ -579,7 +627,7 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-            
+
             imgLa.setBackgroundResource(R.drawable.la1);
         }
         return true;
@@ -622,7 +670,7 @@ public class GameMain extends AppCompatActivity {
                 sp.play(id, 1.0f, 1.0f, 0, 0, 1.0f);
             }
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-            
+
             imgSi.setBackgroundResource(R.drawable.si);
         }
         return true;
@@ -665,11 +713,12 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-            
+
             imgDoo.setBackgroundResource(R.drawable.doo1);
         }
         return true;
     }
+
     private void iklan() {
         final InterstitialAd mInterstitialAd = new InterstitialAd(GameMain.this);
         mInterstitialAd.setAdUnitId("ca-app-pub-5730449577374867/1846252490");
@@ -678,7 +727,7 @@ public class GameMain extends AppCompatActivity {
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
-                if(mInterstitialAd.isLoaded()) {
+                if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                 }
             }
@@ -718,5 +767,19 @@ public class GameMain extends AppCompatActivity {
         } else {
             iklan();
         }
+    }
+
+    private void tglHariIni() {
+        Calendar calendar = Calendar.getInstance();
+        int tglHari = calendar.get(Calendar.DAY_OF_WEEK);
+
+        if (tglHari == Calendar.SATURDAY || tglHari == Calendar.SUNDAY) {
+            mAdView.setVisibility(View.VISIBLE);
+            mAdViewTop.setVisibility(View.GONE);
+        } else {
+            mAdView.setVisibility(View.GONE);
+            mAdViewTop.setVisibility(View.VISIBLE);
+        }
+
     }
 }

@@ -5,197 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background32"
-    tools:context="com.piano.littleponi.TemaPony">
+    android:background="#BA68C8">
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adview"
+    <TextView
+        android:id="@+id/teksTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-5730449577374867/4143390578" />
+        android:padding="10dp"
+        android:text="Choose your Pony's Theme"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        android:textSize="15sp"
+        android:textColor="#fff" />
+
     <ImageView
         android:id="@+id/imgBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/button_back"
-        android:layout_margin="10dp"/>
-    <LinearLayout
+        android:padding="10dp"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80ffffff"
-        android:layout_marginLeft="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp">
-        <ScrollView
+        android:layout_above="@+id/layButtom"
+        android:layout_below="@+id/teksTheme" />
+
+    <LinearLayout
+        android:id="@+id/layButtom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layoutDots"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Choose Your Theme"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    android:textColor="@color/colorPrimary"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginStart="40dp"
-                        android:src="@drawable/background1small"/>
-                    <ImageView
-                        android:id="@+id/btnChoose1"
-                        android:src="@drawable/btn_applied"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginStart="40dp"
-                        android:src="@drawable/background2small"/>
-                    <ImageView
-                        android:id="@+id/btnChoose2"
-                        android:src="@drawable/btn_applied"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginStart="40dp"
-                        android:src="@drawable/background3small"/>
-                    <ImageView
-                        android:id="@+id/btnChoose3"
-                        android:src="@drawable/btn_applied"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginStart="40dp"
-                        android:src="@drawable/background4small"/>
-                    <ImageView
-                        android:id="@+id/btnChoose4"
-                        android:src="@drawable/btn_applied"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginStart="40dp"
-                        android:src="@drawable/background5small"/>
-                    <ImageView
-                        android:id="@+id/btnChoose5"
-                        android:src="@drawable/btn_applied"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="10dp">
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginStart="40dp"
-                        android:src="@drawable/background6small"/>
-                    <ImageView
-                        android:id="@+id/btnChoose6"
-                        android:src="@drawable/btn_applied"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal" />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:text="Apply"/>
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-5730449577374867/7838441000" />
     </LinearLayout>
+
 </RelativeLayout>

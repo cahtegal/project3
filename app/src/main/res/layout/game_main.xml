@@ -9,23 +9,30 @@
     android:background="@drawable/background1"
     tools:context="com.piano.littleponi.GameMain">
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adviewTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-5730449577374867/4143390578" />
+
     <ImageView
         android:id="@+id/imgBack"
+        android:layout_below="@+id/adviewTop"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:src="@drawable/button_back" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
+        android:layout_below="@+id/adviewTop">
         <LinearLayout
             android:id="@+id/linearTeks"
+            android:background="#fff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/rlPiano"
             android:layout_marginEnd="60dp"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
@@ -55,17 +62,25 @@
                 android:textColor="#fff"
                 android:textSize="10sp" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/teksNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/rlPiano"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="Create Note Here"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/teksNote"
+        android:layout_below="@+id/adviewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Create Note Here"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
         <RelativeLayout
             android:id="@+id/rlPiano"
             android:layout_above="@+id/adview"
