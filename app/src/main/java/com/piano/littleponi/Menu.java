@@ -22,19 +22,25 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Menu extends AppCompatActivity {
 
-    ImageView imgPlay, imgShare, imgRateUs, imgTemaDarbuka;
+    ImageView imgPlay, imgShare, imgRateUs, imgTemaDarbuka, imgPianoTheme;
     String appPackageName = BuildConfig.APPLICATION_ID; // getPackageName() from Context or Activity object
     public static boolean iklanOpen = false, isUtama = false;
     AdView mAdView;
-    public static int tema = 1;
+    public static int tema = 1, temaPiano = 0;
     MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
@@ -74,6 +80,7 @@ public class Menu extends AppCompatActivity {
     }
 
     private void declaration() {
+        imgPianoTheme = findViewById(R.id.imgPianoTheme);
         mediaPlayer = MediaPlayer.create(Menu.this,R.raw.tok);
         mAdView = findViewById(R.id.adview);
         imgPlay = findViewById(R.id.imgPlay);
@@ -114,6 +121,20 @@ public class Menu extends AppCompatActivity {
     }
 
     private void action() {
+        imgPianoTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.start();
+                imgPianoTheme.startAnimation(AnimationUtils.loadAnimation(Menu.this, R.anim.zoom_out2));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(Menu.this,TemaPiano.class));
+                    }
+                }, 300);
+
+            }
+        });
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

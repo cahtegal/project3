@@ -26,6 +26,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,7 +34,11 @@
             android:name=".Menu"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".TemaPony"
+        <activity
+            android:name=".TemaPony"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".TemaPiano"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>

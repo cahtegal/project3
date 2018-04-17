@@ -25,15 +25,18 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-
-import java.util.Calendar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 @SuppressWarnings("deprecation")
 public class GameMain extends AppCompatActivity {
 
     ImageView imgDo, imgRe, imgMi, imgFa, imgSol, imgLa, imgSi, imgDoo, imgNote1, imgNote2, imgNote3, imgBack;
     LinearLayout imgPianika, imgPiano, layNote;
-    RelativeLayout layUtama;
+    RelativeLayout layUtama, rlPiano;
     TextView teksNote;
     Button btnClose;
     private int ss1;
@@ -64,7 +67,6 @@ public class GameMain extends AppCompatActivity {
         setContentView(R.layout.game_main);
         deklarasi();
         action();
-        tglHariIni();
     }
 
     @Override
@@ -150,9 +152,36 @@ public class GameMain extends AppCompatActivity {
             sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         }
         setMusic();
+        rlPiano = findViewById(R.id.rlPiano);
     }
 
     private void action() {
+        mAdView.setVisibility(View.GONE);
+        mAdViewTop.setVisibility(View.VISIBLE);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("isTop");
+
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if (value != null) {
+                    if (Integer.parseInt(value) == 1) {
+                        mAdView.setVisibility(View.VISIBLE);
+                        mAdViewTop.setVisibility(View.GONE);
+                    } else {
+                        mAdView.setVisibility(View.GONE);
+                        mAdViewTop.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
@@ -250,6 +279,19 @@ public class GameMain extends AppCompatActivity {
         } else if (Menu.tema == 5) {
             layUtama.setBackground(getResources().getDrawable(R.drawable.background6));
         }
+
+        if (Menu.temaPiano == 0) {
+            rlPiano.setBackground(getResources().getDrawable(R.drawable.pianikamini));
+        } else if (Menu.temaPiano == 1) {
+            rlPiano.setBackground(getResources().getDrawable(R.drawable.pianikamini2));
+        } else if (Menu.temaPiano == 2) {
+            rlPiano.setBackground(getResources().getDrawable(R.drawable.pianikamini3));
+        } else if (Menu.temaPiano == 3) {
+            rlPiano.setBackground(getResources().getDrawable(R.drawable.pianikamini4));
+        } else if (Menu.temaPiano == 4) {
+            rlPiano.setBackground(getResources().getDrawable(R.drawable.pianikamini5));
+        }
+
         imgPiano.setAlpha(1);
         imgPianika.setAlpha(0.5f);
         imgPiano.setOnClickListener(new View.OnClickListener() {
@@ -767,19 +809,5 @@ public class GameMain extends AppCompatActivity {
         } else {
             iklan();
         }
-    }
-
-    private void tglHariIni() {
-        Calendar calendar = Calendar.getInstance();
-        int tglHari = calendar.get(Calendar.DAY_OF_WEEK);
-
-        if (tglHari == Calendar.SATURDAY || tglHari == Calendar.SUNDAY) {
-            mAdView.setVisibility(View.VISIBLE);
-            mAdViewTop.setVisibility(View.GONE);
-        } else {
-            mAdView.setVisibility(View.GONE);
-            mAdViewTop.setVisibility(View.VISIBLE);
-        }
-
     }
 }
