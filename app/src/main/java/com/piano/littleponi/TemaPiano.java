@@ -1,14 +1,18 @@
 package com.piano.littleponi;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +36,7 @@ public class TemaPiano extends AppCompatActivity {
     ImageView imgBack;
     MediaPlayer mpSound1 = new MediaPlayer();
     AdView mAdView;
+    boolean layakTampil = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,34 +91,37 @@ public class TemaPiano extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .build();
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
+        cekJaringan(TemaPiano.this);
+        if (layakTampil) {
+            mAdView.loadAd(adRequest);
+            mAdView.setAdListener(new AdListener() {
 
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-            }
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                }
 
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
+                @Override
+                public void onAdOpened() {
+                    super.onAdOpened();
+                }
 
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
+                @Override
+                public void onAdClosed() {
+                    super.onAdClosed();
+                }
 
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    super.onAdFailedToLoad(i);
+                }
 
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-        });
+                @Override
+                public void onAdLeftApplication() {
+                    super.onAdLeftApplication();
+                }
+            });
+        }
     }
 
     private void action() {
@@ -237,6 +245,75 @@ public class TemaPiano extends AppCompatActivity {
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             View view = (View) object;
             container.removeView(view);
+        }
+    }
+
+    private static NetworkInfo getNetworkInfo(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            return cm.getActiveNetworkInfo();
+        } else {
+            return null;
+        }
+    }
+
+    private void cekJaringan(Activity activity) {
+        NetworkInfo info = getNetworkInfo(activity);
+        if (info !=null) {
+            if (info.getType() == ConnectivityManager.TYPE_WIFI) {
+                layakTampil = true;
+            } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
+                switch (info.getSubtype()) {
+                    case TelephonyManager.NETWORK_TYPE_1xRTT:
+                        // ~ 50-100 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_CDMA:
+                        // ~ 14-64 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_EDGE:
+                        // ~ 50-100 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_0:
+                        // ~ 400-1000 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_A:
+                        // ~ 600-1400 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_GPRS:
+                        // ~ 100 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_HSDPA:
+                        // ~ 2-14 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_HSPA:
+                        // ~ 700-1700 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_HSUPA:
+                        // ~ 1-23 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_UMTS:
+                        // ~ 400-7000 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_EHRPD: // API level 11
+                        // ~ 1-2 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_B: // API level 9
+                        // ~ 5 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_HSPAP: // API level 13
+                        // ~ 10-20 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_IDEN: // API level 8
+                        // ~ 25 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_LTE: // API level 11
+                        // ~ 10+ Mbps
+                        // Unknown
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_UNKNOWN:
+                        layakTampil = true;
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.piano.littleponi;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -10,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -58,8 +60,8 @@ public class GameMain extends AppCompatActivity {
     MediaPlayer mediaPlayer = new MediaPlayer();
     SoundPool sp;
     int music = 1;
-    boolean isFirst1 = false, isFirst2 = false, isFirst3 = false;
-    AdView mAdView, mAdViewTop;
+    boolean isFirst1 = false, isFirst2 = false, isFirst3 = false, layakTampil = false, loadDB = false;
+    AdView mAdViewBottom, mAdViewTop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +74,8 @@ public class GameMain extends AppCompatActivity {
     @Override
     public void onPause() {
         // This method should be called in the parent Activity's onPause() method.
-        if (mAdView != null) {
-            mAdView.pause();
+        if (mAdViewBottom != null) {
+            mAdViewBottom.pause();
         }
         if (mAdViewTop != null) {
             mAdViewTop.pause();
@@ -85,8 +87,8 @@ public class GameMain extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         // This method should be called in the parent Activity's onResume() method.
-        if (mAdView != null) {
-            mAdView.resume();
+        if (mAdViewBottom != null) {
+            mAdViewBottom.resume();
         }
         if (mAdViewTop != null) {
             mAdViewTop.resume();
@@ -97,8 +99,8 @@ public class GameMain extends AppCompatActivity {
     @Override
     public void onDestroy() {
         // This method should be called in the parent Activity's onDestroy() method.
-        if (mAdView != null) {
-            mAdView.destroy();
+        if (mAdViewBottom != null) {
+            mAdViewBottom.destroy();
         }
         if (mAdViewTop != null) {
             mAdViewTop.destroy();
@@ -122,7 +124,7 @@ public class GameMain extends AppCompatActivity {
         mpSound7 = MediaPlayer.create(GameMain.this, R.raw.hohner_soprano_melodica_07_b3);
         mpSound8 = MediaPlayer.create(GameMain.this, R.raw.hohner_soprano_melodica_08_c4);
 
-        mAdView = findViewById(R.id.adview);
+        mAdViewBottom = findViewById(R.id.adview);
         mAdViewTop = findViewById(R.id.adviewTop);
         layNote = findViewById(R.id.linearTeks);
         layNote.setVisibility(View.GONE);
@@ -156,8 +158,9 @@ public class GameMain extends AppCompatActivity {
     }
 
     private void action() {
-        mAdView.setVisibility(View.GONE);
+        mAdViewBottom.setVisibility(View.GONE);
         mAdViewTop.setVisibility(View.VISIBLE);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("isTop");
 
@@ -167,12 +170,21 @@ public class GameMain extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
                 if (value != null) {
+                    loadDB = true;
                     if (Integer.parseInt(value) == 1) {
-                        mAdView.setVisibility(View.VISIBLE);
+                        mAdViewBottom.setVisibility(View.VISIBLE);
                         mAdViewTop.setVisibility(View.GONE);
+                        cekJaringan(GameMain.this);
+                        if (layakTampil) {
+                            loadBawah();
+                        }
                     } else {
-                        mAdView.setVisibility(View.GONE);
+                        mAdViewBottom.setVisibility(View.GONE);
                         mAdViewTop.setVisibility(View.VISIBLE);
+                        cekJaringan(GameMain.this);
+                        if (layakTampil) {
+                            loadAtas();
+                        }
                     }
                 }
             }
@@ -180,67 +192,22 @@ public class GameMain extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
+                loadDB = true;
+                mAdViewBottom.setVisibility(View.GONE);
+                mAdViewTop.setVisibility(View.VISIBLE);
+                cekJaringan(GameMain.this);
+                if (layakTampil) {
+                    loadAtas();
+                }
             }
         });
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
+        if (loadDB) {
+            cekJaringan(GameMain.this);
+            if (layakTampil) {
+                loadAtas();
             }
+        }
 
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-        });
-        mAdViewTop.loadAd(adRequest);
-        mAdViewTop.setAdListener(new AdListener() {
-
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-            }
-
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-            }
-
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-            }
-        });
         teksNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -761,6 +728,74 @@ public class GameMain extends AppCompatActivity {
         return true;
     }
 
+    void loadAtas() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mAdViewTop.loadAd(adRequest);
+        mAdViewTop.setAdListener(new AdListener() {
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+        });
+    }
+
+    void loadBawah() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mAdViewBottom.loadAd(adRequest);
+        mAdViewBottom.setAdListener(new AdListener() {
+
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+
+            @Override
+            public void onAdClosed() {
+                super.onAdClosed();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int i) {
+                super.onAdFailedToLoad(i);
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                super.onAdLeftApplication();
+            }
+        });
+    }
+
     private void iklan() {
         final InterstitialAd mInterstitialAd = new InterstitialAd(GameMain.this);
         mInterstitialAd.setAdUnitId("ca-app-pub-5730449577374867/1846252490");
@@ -807,7 +842,80 @@ public class GameMain extends AppCompatActivity {
         if (netInfo == null) {
             finish();
         } else {
-            iklan();
+            finish();
+            cekJaringan(GameMain.this);
+            if (layakTampil) {
+                iklan();
+            }
+        }
+    }
+
+    private static NetworkInfo getNetworkInfo(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            return cm.getActiveNetworkInfo();
+        } else {
+            return null;
+        }
+    }
+
+    private void cekJaringan(Activity activity) {
+        NetworkInfo info = getNetworkInfo(activity);
+        if (info != null) {
+            if (info.getType() == ConnectivityManager.TYPE_WIFI) {
+                layakTampil = true;
+            } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
+                switch (info.getSubtype()) {
+                    case TelephonyManager.NETWORK_TYPE_1xRTT:
+                        // ~ 50-100 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_CDMA:
+                        // ~ 14-64 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_EDGE:
+                        // ~ 50-100 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_0:
+                        // ~ 400-1000 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_A:
+                        // ~ 600-1400 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_GPRS:
+                        // ~ 100 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_HSDPA:
+                        // ~ 2-14 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_HSPA:
+                        // ~ 700-1700 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_HSUPA:
+                        // ~ 1-23 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_UMTS:
+                        // ~ 400-7000 kbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_EHRPD: // API level 11
+                        // ~ 1-2 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_EVDO_B: // API level 9
+                        // ~ 5 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_HSPAP: // API level 13
+                        // ~ 10-20 Mbps
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_IDEN: // API level 8
+                        // ~ 25 kbps
+                        layakTampil = false;
+                    case TelephonyManager.NETWORK_TYPE_LTE: // API level 11
+                        // ~ 10+ Mbps
+                        // Unknown
+                        layakTampil = true;
+                    case TelephonyManager.NETWORK_TYPE_UNKNOWN:
+                        layakTampil = true;
+                }
+            }
         }
     }
 }

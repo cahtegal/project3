@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:background="#BA68C8">
+    android:background="@color/colorPrimary">
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layButtom"/>
 
     <TextView
         android:id="@+id/teksTheme"
@@ -16,7 +23,7 @@
         android:textAlignment="center"
         android:textStyle="bold|italic"
         android:textSize="15sp"
-        android:textColor="#fff" />
+        android:textColor="@color/colorPrimaryDark" />
 
     <ImageView
         android:id="@+id/imgBack"
@@ -24,13 +31,6 @@
         android:layout_height="50dp"
         android:src="@drawable/button_back"
         android:padding="10dp"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/layButtom"
-        android:layout_below="@+id/teksTheme" />
 
     <LinearLayout
         android:id="@+id/layButtom"
@@ -54,7 +54,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:padding="10dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:textColor="@android:color/white"
             android:text="Apply"/>
 

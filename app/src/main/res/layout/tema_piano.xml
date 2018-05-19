@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background6">
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/teksTheme"
@@ -54,7 +54,7 @@
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:padding="10dp"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:textColor="@android:color/white"
             android:text="Apply"/>
 
