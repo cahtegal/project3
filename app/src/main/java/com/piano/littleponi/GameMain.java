@@ -60,7 +60,9 @@ public class GameMain extends AppCompatActivity {
     MediaPlayer mediaPlayer = new MediaPlayer();
     SoundPool sp;
     int music = 1;
-    boolean isFirst1 = false, isFirst2 = false, isFirst3 = false, layakTampil = false, loadDB = false;
+    boolean layakTampil = false, loadDB = false;
+    boolean isFirst1 = false, isFirst2 = false, isFirst3 = false, isFirstDo = true, isFirstRe = true, isFirstMi = true, isFirstFa = true,
+            isFirstSol = true, isFirstLa = true, isFirstSi = true, isFirstDoo = true;
     AdView mAdViewBottom, mAdViewTop;
 
     @Override
@@ -284,56 +286,192 @@ public class GameMain extends AppCompatActivity {
         imgDo.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound1(ss1, event);
+                if (event.getX() <= imgDo.getWidth()) { // TRUE SOUND
+                    playSound1(ss1, event);
+                } else if (event.getX() > imgDo.getWidth() && event.getX() <= imgDo.getWidth()*2) {
+                    playSound2(ss2, event);
+                } else if (event.getX() > imgDo.getWidth()*2 && event.getX() <= imgDo.getWidth()*3) {
+                    playSound3(ss3, event);
+                } else if (event.getX() > imgDo.getWidth()*3 && event.getX() <= imgDo.getWidth()*4) {
+                    playSound4(ss4, event);
+                } else if (event.getX() > imgDo.getWidth()*4 && event.getX() <= imgDo.getWidth()*5) {
+                    playSound5(ss5, event);
+                } else if (event.getX() > imgDo.getWidth()*5 && event.getX() <= imgDo.getWidth()*6) {
+                    playSound6(ss6, event);
+                } else if (event.getX() > imgDo.getWidth()*6 && event.getX() <= imgDo.getWidth()*7) {
+                    playSound7(ss7, event);
+                } else if (event.getX() > imgDo.getWidth()*7 && event.getX() <= imgDo.getWidth()*8) {
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
 
         imgRe.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound2(ss2, event);
+                if (event.getX() < 0) {
+                    playSound1(ss1, event);
+                } else if (event.getX() >=0 && event.getX() <= imgRe.getWidth()) { // TRUE SOUND
+                    playSound2(ss2, event);
+                } else if (event.getX() > imgRe.getWidth() && event.getX() <= imgRe.getWidth()*2) {
+                    playSound3(ss3, event);
+                } else if (event.getX() > imgRe.getWidth()*2 && event.getX() <= imgRe.getWidth()*3) {
+                    playSound4(ss4, event);
+                } else if (event.getX() > imgRe.getWidth()*3 && event.getX() <= imgRe.getWidth()*4) {
+                    playSound5(ss5, event);
+                } else if (event.getX() > imgRe.getWidth()*4 && event.getX() <= imgRe.getWidth()*5) {
+                    playSound6(ss6, event);
+                } else if (event.getX() > imgRe.getWidth()*5 && event.getX() <= imgRe.getWidth()*6) {
+                    playSound7(ss7, event);
+                } else if (event.getX() > imgRe.getWidth()*6 && event.getX() <= imgRe.getWidth()*7) {
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
 
         imgMi.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound3(ss3, event);
+                if (event.getX() < -imgDo.getWidth()) {
+                    playSound1(ss1, event);
+                } else if (event.getX() >= -imgDo.getWidth() && event.getX() < 0) {
+                    playSound2(ss2, event);
+                } else if (event.getX() >=0 && event.getX() <= imgDo.getWidth()) { // TRUE SOUND
+                    playSound3(ss3, event);
+                } else if (event.getX() > imgDo.getWidth() && event.getX() <= imgDo.getWidth()*2) {
+                    playSound4(ss4, event);
+                } else if (event.getX() > imgDo.getWidth()*2 && event.getX() <= imgDo.getWidth()*3) {
+                    playSound5(ss5, event);
+                } else if (event.getX() > imgDo.getWidth()*3 && event.getX() <= imgDo.getWidth()*4) {
+                    playSound6(ss6, event);
+                } else if (event.getX() > imgDo.getWidth()*4 && event.getX() <= imgDo.getWidth()*5) {
+                    playSound7(ss7, event);
+                } else if (event.getX() > imgDo.getWidth()*5 && event.getX() <= imgDo.getWidth()*6) {
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
 
         imgFa.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound4(ss4, event);
+                if (event.getX() < -imgDo.getWidth()*2) {
+                    playSound1(ss1, event);
+                } else if (event.getX() >= -imgDo.getWidth()*2 && event.getX() < -imgDo.getWidth()) {
+                    playSound2(ss2, event);
+                } else if (event.getX() >= -imgDo.getWidth() && event.getX() < 0) {
+                    playSound3(ss3, event);
+                } else if (event.getX() >=0 && event.getX() <= imgDo.getWidth()) { // TRUE SOUND
+                    playSound4(ss4, event);
+                } else if (event.getX() > imgDo.getWidth() && event.getX() <= imgDo.getWidth()*2) {
+                    playSound5(ss5, event);
+                } else if (event.getX() > imgDo.getWidth()*2 && event.getX() <= imgDo.getWidth()*3) {
+                    playSound6(ss6, event);
+                } else if (event.getX() > imgDo.getWidth()*3 && event.getX() <= imgDo.getWidth()*4) {
+                    playSound7(ss7, event);
+                } else if (event.getX() > imgDo.getWidth()*4 && event.getX() <= imgDo.getWidth()*5) {
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
 
         imgSol.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound5(ss5, event);
+                if (event.getX() < -imgDo.getWidth()*3) {
+                    playSound1(ss1, event);
+                } else if (event.getX() >= -imgDo.getWidth()*3 && event.getX() < -imgDo.getWidth()*2) {
+                    playSound2(ss2, event);
+                } else if (event.getX() >= -imgDo.getWidth()*2 && event.getX() < -imgDo.getWidth()) {
+                    playSound3(ss3, event);
+                } else if (event.getX() >= -imgDo.getWidth() && event.getX() < 0) {
+                    playSound4(ss4, event);
+                } else if (event.getX() >=0 && event.getX() <= imgDo.getWidth()) { // TRUE SOUND
+                    playSound5(ss5, event);
+                } else if (event.getX() > imgDo.getWidth() && event.getX() <= imgDo.getWidth()*2) {
+                    playSound6(ss6, event);
+                } else if (event.getX() > imgDo.getWidth()*2 && event.getX() <= imgDo.getWidth()*3) {
+                    playSound7(ss7, event);
+                } else if (event.getX() > imgDo.getWidth()*3 && event.getX() <= imgDo.getWidth()*4) {
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
 
         imgLa.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound6(ss6, event);
+                if (event.getX() < -imgDo.getWidth()*4) {
+                    playSound1(ss1, event);
+                } else if (event.getX() >= -imgDo.getWidth()*4 && event.getX() < -imgDo.getWidth()*3) {
+                    playSound2(ss2, event);
+                } else if (event.getX() >= -imgDo.getWidth()*3 && event.getX() < -imgDo.getWidth()*2) {
+                    playSound3(ss3, event);
+                } else if (event.getX() >= -imgDo.getWidth()*2 && event.getX() < -imgDo.getWidth()) {
+                    playSound4(ss4, event);
+                } else if (event.getX() >= -imgDo.getWidth() && event.getX() < 0) {
+                    playSound5(ss5, event);
+                } else if (event.getX() >=0 && event.getX() <= imgDo.getWidth()) { // TRUE SOUND
+                    playSound6(ss6, event);
+                } else if (event.getX() > imgDo.getWidth() && event.getX() <= imgDo.getWidth()*2) {
+                    playSound7(ss7, event);
+                } else if (event.getX() > imgDo.getWidth()*2 && event.getX() <= imgDo.getWidth()*3) {
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
 
         imgSi.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound7(ss7, event);
+                if (event.getX() < -imgDo.getWidth()*5) {
+                    playSound1(ss1, event);
+                } else if (event.getX() >= -imgDo.getWidth()*5 && event.getX() < -imgDo.getWidth()*4) {
+                    playSound2(ss2, event);
+                } else if (event.getX() >= -imgDo.getWidth()*4 && event.getX() < -imgDo.getWidth()*3) {
+                    playSound3(ss3, event);
+                } else if (event.getX() >= -imgDo.getWidth()*3 && event.getX() < -imgDo.getWidth()*2) {
+                    playSound4(ss4, event);
+                } else if (event.getX() >= -imgDo.getWidth()*2 && event.getX() < -imgDo.getWidth()) {
+                    playSound5(ss5, event);
+                } else if (event.getX() >= -imgDo.getWidth() && event.getX() < 0) {
+                    playSound6(ss6, event);
+                } else if (event.getX() >=0 && event.getX() <= imgDo.getWidth()) { // TRUE SOUND
+                    playSound7(ss7, event);
+                } else if (event.getX() > imgDo.getWidth() && event.getX() <= imgDo.getWidth()*2) {
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
 
         imgDoo.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return playSound8(ss8, event);
+                if (event.getX() < -imgDo.getWidth()*6) {
+                    playSound1(ss1, event);
+                } else if (event.getX() >= -imgDo.getWidth()*6 && event.getX() < -imgDo.getWidth()*5) {
+                    playSound2(ss2, event);
+                } else if (event.getX() >= -imgDo.getWidth()*5 && event.getX() < -imgDo.getWidth()*4) {
+                    playSound3(ss3, event);
+                } else if (event.getX() >= -imgDo.getWidth()*4 && event.getX() < -imgDo.getWidth()*3) {
+                    playSound4(ss4, event);
+                } else if (event.getX() >= -imgDo.getWidth()*3 && event.getX() < -imgDo.getWidth()*2) {
+                    playSound5(ss5, event);
+                } else if (event.getX() >= -imgDo.getWidth()*2 && event.getX() < -imgDo.getWidth()) {
+                    playSound6(ss6, event);
+                } else if (event.getX() >= -imgDo.getWidth() && event.getX() < 0) {
+                    playSound7(ss7, event);
+                } else if (event.getX() >=0 && event.getX() <= imgDo.getWidth()) { // TRUE SOUND
+                    playSound8(ss8, event);
+                }
+                return true;
             }
         });
     }
@@ -370,10 +508,14 @@ public class GameMain extends AppCompatActivity {
         }
     }
 
-    private boolean playSound1(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgDo.setBackgroundResource(R.drawable.do2);
+    private void playSound1(int id, MotionEvent motionEvent) {
+
+        if (motionEvent == null || motionEvent.getAction() == 0 || motionEvent.getAction() == 2 && isFirstDo) {
+            isFirstMi = true;
+            isFirstRe = true;
+            isFirstDo = false;
+            imgDo.setBackground(getResources().getDrawable(R.drawable.do2));
+            imgRe.setBackground(getResources().getDrawable(R.drawable.re1));
             if (music == 0) {
                 mpSound1.start();
             } else {
@@ -406,7 +548,10 @@ public class GameMain extends AppCompatActivity {
 
                 }
             });
-        } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
+        } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3 ) {
+            isFirstMi = true;
+            isFirstRe = true;
+            isFirstDo = true;
             if (music != 1) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -415,15 +560,19 @@ public class GameMain extends AppCompatActivity {
                     }
                 }, 2000);
             }
-            imgDo.setBackgroundResource(R.drawable.do1);
+            imgDo.setBackground(getResources().getDrawable(R.drawable.do1));
         }
-        return true;
     }
 
-    private boolean playSound2(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgRe.setBackgroundResource(R.drawable.re2);
+    private void playSound2(int id, MotionEvent motionEvent) {
+
+        if (motionEvent == null || motionEvent.getAction() == 0 || motionEvent.getAction() == 2 && isFirstRe) {
+            isFirstMi = true;
+            isFirstRe = false;
+            isFirstDo = true;
+            imgMi.setBackground(getResources().getDrawable(R.drawable.mi1));
+            imgRe.setBackground(getResources().getDrawable(R.drawable.re2));
+            imgDo.setBackground(getResources().getDrawable(R.drawable.do1));
             if (music == 0) {
                 mpSound2.start();
             } else {
@@ -457,6 +606,9 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
+            isFirstMi = true;
+            isFirstRe = true;
+            isFirstDo = true;
             if (music != 1) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -465,15 +617,18 @@ public class GameMain extends AppCompatActivity {
                     }
                 }, 2000);
             }
-            imgRe.setBackgroundResource(R.drawable.re1);
+            imgRe.setBackground(getResources().getDrawable(R.drawable.re1));
         }
-        return true;
     }
 
-    private boolean playSound3(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgMi.setBackgroundResource(R.drawable.mi2);
+    private void playSound3(int id, MotionEvent motionEvent) {
+        if (motionEvent == null || motionEvent.getAction() == 0  || motionEvent.getAction() == 2 && isFirstMi) {
+            isFirstFa = true;
+            isFirstMi = false;
+            isFirstRe = true;
+            imgFa.setBackground(getResources().getDrawable(R.drawable.fa1));
+            imgMi.setBackground(getResources().getDrawable(R.drawable.mi2));
+            imgRe.setBackground(getResources().getDrawable(R.drawable.re1));
             if (music == 0) {
                 mpSound3.start();
             } else {
@@ -507,16 +662,21 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-
-            imgMi.setBackgroundResource(R.drawable.mi1);
+            isFirstMi = true;
+            isFirstRe = true;
+            isFirstDo = true;
+            imgMi.setBackground(getResources().getDrawable(R.drawable.mi1));
         }
-        return true;
     }
 
-    private boolean playSound4(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgFa.setBackgroundResource(R.drawable.fa2);
+    private void playSound4(int id, MotionEvent motionEvent) {
+        if (motionEvent == null || motionEvent.getAction() == 0  || motionEvent.getAction() == 2 && isFirstFa) {
+            isFirstSol = true;
+            isFirstFa = false;
+            isFirstMi = true;
+            imgSol.setBackground(getResources().getDrawable(R.drawable.sol1));
+            imgFa.setBackground(getResources().getDrawable(R.drawable.fa2));
+            imgMi.setBackground(getResources().getDrawable(R.drawable.mi1));
             imgNote2.setVisibility(View.VISIBLE);
             if (isFirst2) {
                 isFirst2 = false;
@@ -550,15 +710,18 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-
-            imgFa.setBackgroundResource(R.drawable.fa1);
+            imgFa.setBackground(getResources().getDrawable(R.drawable.fa1));
         }
-        return true;
     }
 
-    private boolean playSound5(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
+    private void playSound5(int id, MotionEvent motionEvent) {
+        if (motionEvent == null || motionEvent.getAction() == 0  || motionEvent.getAction() == 2 && isFirstSol) {
+            isFirstLa = true;
+            isFirstSol = false;
+            isFirstFa = true;
+            imgLa.setBackground(getResources().getDrawable(R.drawable.la1));
+            imgSol.setBackground(getResources().getDrawable(R.drawable.sol2));
+            imgFa.setBackground(getResources().getDrawable(R.drawable.fa1));
             imgNote2.setVisibility(View.VISIBLE);
             if (isFirst2) {
                 isFirst2 = false;
@@ -567,7 +730,6 @@ public class GameMain extends AppCompatActivity {
                 isFirst2 = true;
                 imgNote2.setImageDrawable(getResources().getDrawable(R.drawable.musical_note1));
             }
-            imgSol.setBackgroundResource(R.drawable.sol2);
             if (music == 0) {
                 mpSound5.start();
             } else {
@@ -594,15 +756,19 @@ public class GameMain extends AppCompatActivity {
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
 
-            imgSol.setBackgroundResource(R.drawable.sol1);
+            imgSol.setBackground(getResources().getDrawable(R.drawable.sol1));
         }
-        return true;
     }
 
-    private boolean playSound6(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgLa.setBackgroundResource(R.drawable.la2);
+    private void playSound6(int id, MotionEvent motionEvent) {
+
+        if (motionEvent == null || motionEvent.getAction() == 0  || motionEvent.getAction() == 2 && isFirstLa) {
+            isFirstSi = true;
+            isFirstLa = false;
+            isFirstSol = true;
+            imgSi.setBackground(getResources().getDrawable(R.drawable.si));
+            imgLa.setBackground(getResources().getDrawable(R.drawable.la2));
+            imgSol.setBackground(getResources().getDrawable(R.drawable.sol1));
             imgNote2.setVisibility(View.VISIBLE);
             if (isFirst2) {
                 isFirst2 = false;
@@ -637,15 +803,19 @@ public class GameMain extends AppCompatActivity {
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
 
-            imgLa.setBackgroundResource(R.drawable.la1);
+            imgLa.setBackground(getResources().getDrawable(R.drawable.la1));
         }
-        return true;
     }
 
-    private boolean playSound7(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgSi.setBackgroundResource(R.drawable.si2);
+    private void playSound7(int id, MotionEvent motionEvent) {
+
+        if (motionEvent == null || motionEvent.getAction() == 0  || motionEvent.getAction() == 2 && isFirstSi) {
+            isFirstDoo = true;
+            isFirstSi = false;
+            isFirstLa = true;
+            imgDoo.setBackground(getResources().getDrawable(R.drawable.doo1));
+            imgSi.setBackground(getResources().getDrawable(R.drawable.si2));
+            imgLa.setBackground(getResources().getDrawable(R.drawable.la1));
             imgNote3.setVisibility(View.VISIBLE);
             if (isFirst3) {
                 isFirst3 = false;
@@ -679,16 +849,17 @@ public class GameMain extends AppCompatActivity {
                 sp.play(id, 1.0f, 1.0f, 0, 0, 1.0f);
             }
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-
-            imgSi.setBackgroundResource(R.drawable.si);
+            imgSi.setBackground(getResources().getDrawable(R.drawable.si));
         }
-        return true;
     }
 
-    private boolean playSound8(int id, MotionEvent motionEvent) {
-        Log.d("Motionsss  ", String.valueOf(motionEvent));
-        if (motionEvent == null || motionEvent.getAction() == 0) {
-            imgDoo.setBackgroundResource(R.drawable.doo2);
+    private void playSound8(int id, MotionEvent motionEvent) {
+
+        if (motionEvent == null || motionEvent.getAction() == 0  || motionEvent.getAction() == 2 && isFirstDoo) {
+            isFirstDoo = false;
+            isFirstSi = true;
+            imgDoo.setBackground(getResources().getDrawable(R.drawable.doo2));
+            imgSi.setBackground(getResources().getDrawable(R.drawable.si));
             imgNote3.setVisibility(View.VISIBLE);
             if (isFirst3) {
                 isFirst3 = false;
@@ -722,10 +893,8 @@ public class GameMain extends AppCompatActivity {
                 }
             });
         } else if (motionEvent.getAction() == 1 || motionEvent.getAction() == 3) {
-
-            imgDoo.setBackgroundResource(R.drawable.doo1);
+            imgDoo.setBackground(getResources().getDrawable(R.drawable.doo1));
         }
-        return true;
     }
 
     void loadAtas() {

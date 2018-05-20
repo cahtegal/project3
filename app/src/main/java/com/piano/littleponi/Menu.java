@@ -64,6 +64,7 @@ public class Menu extends AppCompatActivity {
             mAdView.resume();
         }
     }
+
     @Override
     public void onPause() {
         // This method should be called in the parent Activity's onPause() method.
@@ -84,7 +85,7 @@ public class Menu extends AppCompatActivity {
 
     private void declaration() {
         imgPianoTheme = findViewById(R.id.imgPianoTheme);
-        mediaPlayer = MediaPlayer.create(Menu.this,R.raw.tok);
+        mediaPlayer = MediaPlayer.create(Menu.this, R.raw.tok);
         mAdView = findViewById(R.id.adview);
         imgPlay = findViewById(R.id.imgPlay);
         imgTemaDarbuka = findViewById(R.id.imgDarbukaTheme);
@@ -135,7 +136,7 @@ public class Menu extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(Menu.this,TemaPiano.class));
+                        startActivity(new Intent(Menu.this, TemaPiano.class));
                     }
                 }, 300);
 
@@ -157,7 +158,7 @@ public class Menu extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(Menu.this,TemaPony.class));
+                        startActivity(new Intent(Menu.this, TemaPony.class));
                     }
                 }, 300);
             }
@@ -184,21 +185,17 @@ public class Menu extends AppCompatActivity {
             public void onClick(View view) {
                 mediaPlayer.start();
                 imgRateUs.startAnimation(AnimationUtils.loadAnimation(Menu.this, R.anim.zoom_out2));
-                try {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                        }
-                    }, 300);
-                } catch (ActivityNotFoundException e) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                        } catch (ActivityNotFoundException e) {
+                            e.printStackTrace();
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                         }
-                    }, 300);
-                }
+                    }
+                }, 300);
             }
         });
     }
@@ -250,6 +247,7 @@ public class Menu extends AppCompatActivity {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
     private void iklan() {
         LayoutInflater inflater = LayoutInflater.from(Menu.this);
         @SuppressLint("InflateParams")
@@ -267,7 +265,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onAdLoaded() {
                 super.onAdLoaded();
-                if(mInterstitialAd.isLoaded()) {
+                if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
                     if (!iklanOpen) {
                         iklanOpen = true;
@@ -284,7 +282,13 @@ public class Menu extends AppCompatActivity {
             public void onAdClosed() {
                 super.onAdClosed();
                 if (!isUtama) {
-                    theDialog.dismiss();
+                    try {
+                        theDialog.dismiss();
+                    } catch (IllegalArgumentException exp) {
+                        exp.printStackTrace();
+                    } catch (Exception exp) {
+                        exp.printStackTrace();
+                    }
                     startActivity(new Intent(Menu.this, GameMain.class));
                 }
             }
@@ -297,6 +301,19 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onAdFailedToLoad(int i) {
                 super.onAdFailedToLoad(i);
+                if (!iklanOpen) {
+                    iklanOpen = true;
+                    if (!isUtama) {
+                        try {
+                            theDialog.dismiss();
+                        } catch (IllegalArgumentException exp) {
+                            exp.printStackTrace();
+                        } catch (Exception exp) {
+                            exp.printStackTrace();
+                        }
+                        startActivity(new Intent(Menu.this, GameMain.class));
+                    }
+                }
             }
         });
 
@@ -309,12 +326,18 @@ public class Menu extends AppCompatActivity {
                 if (!iklanOpen) {
                     iklanOpen = true;
                     if (!isUtama) {
-                        theDialog.dismiss();
-                        startActivity(new Intent(Menu.this,GameMain.class));
+                        try {
+                            theDialog.dismiss();
+                        } catch (IllegalArgumentException exp) {
+                            exp.printStackTrace();
+                        } catch (Exception exp) {
+                            exp.printStackTrace();
+                        }
+                        startActivity(new Intent(Menu.this, GameMain.class));
                     }
                 }
             }
-        },3000);
+        }, 3000);
     }
 
     private void cekKoneksi() {
@@ -341,7 +364,7 @@ public class Menu extends AppCompatActivity {
 
     private void cekJaringan(Activity activity) {
         NetworkInfo info = getNetworkInfo(activity);
-        if (info !=null) {
+        if (info != null) {
             if (info.getType() == ConnectivityManager.TYPE_WIFI) {
                 layakTampil = true;
             } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
