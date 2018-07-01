@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.piano.littlepony"
+        applicationId "piano.littlepony.id"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 7
-        versionName "2.0.0"
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
