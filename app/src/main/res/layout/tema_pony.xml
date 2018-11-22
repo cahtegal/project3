@@ -19,11 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="Choose your Pony's Theme"
+        android:text="Choose your Background's Theme"
         android:textAlignment="center"
         android:textStyle="bold|italic"
         android:textSize="15sp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="#000" />
 
     <ImageView
         android:id="@+id/imgBack"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-5730449577374867/7838441000" />
+            ads:adUnitId="ca-app-pub-5730449577374867/5786241667" />
     </LinearLayout>
 
 </RelativeLayout>

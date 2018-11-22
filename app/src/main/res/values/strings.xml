@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Piano Little Pony</string>
+    <string name="app_name">Piano Mini - Sabyan</string>
     <array name="array_dot_active">
         <item>@color/colorPrimaryDark</item>
         <item>@color/colorPrimaryDark</item>

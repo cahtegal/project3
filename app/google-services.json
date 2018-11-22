@@ -1,31 +1,27 @@
 {
   "project_info": {
-    "project_number": "632781524588",
-    "firebase_url": "https://pianika-pony-ungu.firebaseio.com",
-    "project_id": "pianika-pony-ungu",
-    "storage_bucket": "pianika-pony-ungu.appspot.com"
+    "project_number": "172470532764",
+    "firebase_url": "https://piano-372c8.firebaseio.com",
+    "project_id": "piano-372c8",
+    "storage_bucket": "piano-372c8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:632781524588:android:884a7140684f1a28",
+        "mobilesdk_app_id": "1:172470532764:android:2e2657b0b9847606",
         "android_client_info": {
-          "package_name": "com.piano.littlepony"
+          "package_name": "com.nextwin.mydarbuka"
         }
       },
       "oauth_client": [
         {
-          "client_id": "632781524588-3tqdkhmodf9ghihicbp2792ju1dmmin7.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "632781524588-3tqdkhmodf9ghihicbp2792ju1dmmin7.apps.googleusercontent.com",
+          "client_id": "172470532764-5tn6duvn212v9cedli33vklrt1ijqfus.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAybzeT6vqXEnJ-SeKNeJV7RFhEvl_cxxo"
+          "current_key": "AIzaSyA9NYuF3xSenvxmXDxMj64FBPlsTqNe0WQ"
         }
       ],
       "services": {
@@ -43,24 +39,144 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:632781524588:android:07407fd36629a3c4",
+        "mobilesdk_app_id": "1:172470532764:android:cc17d63bacb7f59a",
         "android_client_info": {
-          "package_name": "piano.littlepony.id"
+          "package_name": "com.nextwin.mypianika"
         }
       },
       "oauth_client": [
         {
-          "client_id": "632781524588-3tqdkhmodf9ghihicbp2792ju1dmmin7.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "632781524588-3tqdkhmodf9ghihicbp2792ju1dmmin7.apps.googleusercontent.com",
+          "client_id": "172470532764-5tn6duvn212v9cedli33vklrt1ijqfus.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAybzeT6vqXEnJ-SeKNeJV7RFhEvl_cxxo"
+          "current_key": "AIzaSyA9NYuF3xSenvxmXDxMj64FBPlsTqNe0WQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172470532764:android:be924714c8fa9dd7",
+        "android_client_info": {
+          "package_name": "com.nextwin.pianika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172470532764-5tn6duvn212v9cedli33vklrt1ijqfus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9NYuF3xSenvxmXDxMj64FBPlsTqNe0WQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172470532764:android:b62c848384edf3fd",
+        "android_client_info": {
+          "package_name": "com.nextwin.pianikasabyan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172470532764-5tn6duvn212v9cedli33vklrt1ijqfus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9NYuF3xSenvxmXDxMj64FBPlsTqNe0WQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172470532764:android:98f3906b3425c064",
+        "android_client_info": {
+          "package_name": "com.nextwin.piano.sabyan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172470532764-5tn6duvn212v9cedli33vklrt1ijqfus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9NYuF3xSenvxmXDxMj64FBPlsTqNe0WQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172470532764:android:ceb2db5545b6b0e8",
+        "android_client_info": {
+          "package_name": "com.nextwin.realpiano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172470532764-5tn6duvn212v9cedli33vklrt1ijqfus.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9NYuF3xSenvxmXDxMj64FBPlsTqNe0WQ"
         }
       ],
       "services": {

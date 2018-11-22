@@ -6,8 +6,7 @@
     android:id="@+id/layUtama"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background1"
-    tools:context="com.piano.littleponi.GameMain">
+    android:background="@drawable/bg1">
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adviewTop"
@@ -15,7 +14,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-5730449577374867/4143390578" />
+        ads:adUnitId="ca-app-pub-5730449577374867/5786241667" />
 
     <ImageView
         android:id="@+id/imgBack"
@@ -234,6 +233,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-5730449577374867/4143390578" />
+            ads:adUnitId="ca-app-pub-5730449577374867/5786241667" />
     </RelativeLayout>
 </RelativeLayout>

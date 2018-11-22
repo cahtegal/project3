@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
-    android:background="@drawable/background2">
+    android:background="@drawable/bg2">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:src="@drawable/tema_piano"/>
         <ImageView
             android:id="@+id/imgDarbukaTheme"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
@@ -73,5 +73,5 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-5730449577374867/4143390578" />
+        ads:adUnitId="ca-app-pub-5730449577374867/5786241667" />
 </RelativeLayout>

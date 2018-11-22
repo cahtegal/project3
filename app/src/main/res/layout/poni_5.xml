@@ -7,5 +7,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:src="@drawable/background5"/>
+        android:src="@drawable/bg5"/>
 </LinearLayout>
